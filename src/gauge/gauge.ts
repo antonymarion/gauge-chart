@@ -80,11 +80,43 @@ export function arcOutline(
       .outerRadius(outerRadius)
       .startAngle(startAngle)
       .endAngle(endAngle)
+    let linearGradient = svg
+      .append('defs')
+      .append('linearGradient')
+      .attr('id', 'MyGradient')
+
+    let linearGradient2 = svg
+      .append('defs')
+      .append('linearGradient')
+      .attr('id', 'MyGradient2')
+
+    linearGradient
+      .append('stop')
+      .attr('offset', '0%')
+      .attr('stop-color', '#013220')
+      .append('stop')
+      .attr('offset', '30%')
+      .attr('stop-color', '#013220')
+
+    linearGradient
+      .append('stop')
+      .attr('offset', '60%')
+      .attr('stop-color', '#4eff00')
+
+    linearGradient2
+      .append('stop')
+      .attr('offset', '5%')
+      .attr('stop-color', '#320300')
+
+    linearGradient2
+      .append('stop')
+      .attr('offset', '60%')
+      .attr('stop-color', '#ff002e')
 
     let innerArc = svg
       .append('path')
       .attr('d', gaugeArc)
-      .attr('fill', color)
+      .attr('fill', i === 0 ? 'url(#MyGradient)' : 'url(#MyGradient2)')
       .attr(
         'transform',
         'translate(' +
@@ -159,7 +191,7 @@ export function arcOutline(
               centerY +
               ') ' +
               'rotate(' +
-              endAngle * 180 / Math.PI +
+              (endAngle * 180) / Math.PI +
               ', ' +
               0 +
               ',' +
@@ -199,7 +231,7 @@ export function arcOutline(
         // endAngle = PI/2 => offset = 0
         let xPadding = 4
         let xOffset =
-          (endAngle - Math.PI / 2) / Math.PI * (size.width + xPadding)
+          ((endAngle - Math.PI / 2) / Math.PI) * (size.width + xPadding)
 
         // now place label
         svg
@@ -326,17 +358,17 @@ export function labelOutline(
     ? areaWidth / 2 -
       outerRadius -
       arcWidth / 2 -
-      realRangeFontSize * rangeLabel[0].length / 2
+      (realRangeFontSize * rangeLabel[0].length) / 2
     : 0
   let rightRangeLabelOffsetX = rangeLabel[1]
     ? areaWidth / 2 +
       outerRadius +
       arcWidth / 2 -
-      realRangeFontSize * rangeLabel[1].length / 2
+      (realRangeFontSize * rangeLabel[1].length) / 2
     : 0
   let rangeLabelOffsetY = offset + chartHeight + realRangeFontSize * 2
   let centralLabelOffsetX =
-    areaWidth / 2 - realCentralFontSize * centralLabel.length / 2
+    areaWidth / 2 - (realCentralFontSize * centralLabel.length) / 2
   let centralLabelOffsetY = offset + chartHeight
 
   svg
