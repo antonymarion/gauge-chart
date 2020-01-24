@@ -90,6 +90,11 @@ export function arcOutline(
       .append('linearGradient')
       .attr('id', 'MyGradient2')
 
+    let linearGradient3 = svg
+      .append('defs')
+      .append('linearGradient')
+      .attr('id', 'MyGradient3')
+
     linearGradient
       .append('stop')
       .attr('offset', '0%')
@@ -106,9 +111,18 @@ export function arcOutline(
     linearGradient2
       .append('stop')
       .attr('offset', '5%')
-      .attr('stop-color', '#320300')
+      .attr('stop-color', '#5b6200')
 
     linearGradient2
+      .append('stop')
+      .attr('offset', '60%')
+      .attr('stop-color', '#ecef00')
+    linearGradient3
+      .append('stop')
+      .attr('offset', '5%')
+      .attr('stop-color', '#320300')
+
+    linearGradient3
       .append('stop')
       .attr('offset', '60%')
       .attr('stop-color', '#ff002e')
@@ -116,7 +130,14 @@ export function arcOutline(
     let innerArc = svg
       .append('path')
       .attr('d', gaugeArc)
-      .attr('fill', i === 0 ? 'url(#MyGradient)' : 'url(#MyGradient2)')
+      .attr(
+        'fill',
+        i % 2 === 0
+          ? i === 0
+            ? 'url(#MyGradient)'
+            : 'url(#MyGradient3)'
+          : 'url(#MyGradient3)',
+      )
       .attr(
         'transform',
         'translate(' +
