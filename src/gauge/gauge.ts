@@ -136,7 +136,7 @@ export function arcOutline(
           ? i === 0
             ? 'url(#MyGradient)'
             : 'url(#MyGradient3)'
-          : 'url(#MyGradient3)',
+          : 'url(#MyGradient2)',
       )
       .attr(
         'transform',
